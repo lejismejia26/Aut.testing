@@ -1,0 +1,146 @@
+{
+	"info": {
+		"_postman_id": "c44d653d-a58e-409e-9165-2c0edc281d29",
+		"name": "Consumo Actualización OPEN y Registraduría",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Actualización Datos OPEN",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.clearGlobalVariable(\"Contrato\");\r",
+							"if(data.l_contrato !== \"null\" & data.l_contrato !== null){\r",
+							"    var p_contrato = '\\\"' + data.l_contrato + '\\\"';\r",
+							"    postman.setGlobalVariable(\"Contrato\", p_contrato);\r",
+							"}else{\r",
+							"    postman.setGlobalVariable(\"Contrato\", data.l_contrato);\r",
+							"}\r",
+							"postman.clearGlobalVariable(\"TipoDocumento\");\r",
+							"if(data.l_TipoDocumento !== \"null\" & data.l_TipoDocumento !== null){\r",
+							"    var p_TipoDocumento = '\\\"' + data.l_TipoDocumento + '\\\"';\r",
+							"    postman.setGlobalVariable(\"TipoDocumento\", p_TipoDocumento);\r",
+							"}else{\r",
+							"    postman.setGlobalVariable(\"TipoDocumento\", data.l_TipoDocumento);\r",
+							"}\r",
+							"\r",
+							"postman.clearGlobalVariable(\"NumeroDocumento\");\r",
+							"if(data.l_NumeroDocumento !== \"null\" & data.l_NumeroDocumento !== null){\r",
+							"    var p_NumeroDocumento = '\\\"' + data.l_NumeroDocumento + '\\\"';\r",
+							"    postman.setGlobalVariable(\"NumeroDocumento\", p_NumeroDocumento);\r",
+							"}else{\r",
+							"    postman.setGlobalVariable(\"NumeroDocumento\", data.l_NumeroDocumento);\r",
+							"}\r",
+							"\r",
+							"postman.clearGlobalVariable(\"Nombre\");\r",
+							"if(data.l_Nombre !== \"null\" & data.l_Nombre !== null){\r",
+							"    var p_Nombre = '\\\"' + data.l_Nombre + '\\\"';\r",
+							"    postman.setGlobalVariable(\"Nombre\", p_Nombre);\r",
+							"}else{\r",
+							"    postman.setGlobalVariable(\"Nombre\", data.l_Nombre);\r",
+							"}\r",
+							"\r",
+							"postman.clearGlobalVariable(\"Apellido\");\r",
+							"if(data.l_Apellido !== \"null\" & data.l_Apellido !== null){\r",
+							"    var p_Apellido = '\\\"' + data.l_Apellido + '\\\"';\r",
+							"    postman.setGlobalVariable(\"Apellido\", p_Apellido);\r",
+							"}else{\r",
+							"    postman.setGlobalVariable(\"Apellido\", data.l_Apellido);\r",
+							"}\r",
+							"\r",
+							"postman.clearGlobalVariable(\"Telefono\");\r",
+							"if(data.l_Telefono !== \"null\" & data.l_Telefono !== null){\r",
+							"    var p_Telefono = '\\\"' + data.l_Telefono + '\\\"';\r",
+							"    postman.setGlobalVariable(\"Telefono\", p_Telefono);\r",
+							"}else{\r",
+							"    postman.setGlobalVariable(\"Telefono\", data.l_Telefono);\r",
+							"}\r",
+							"\r",
+							"postman.clearGlobalVariable(\"CorreoElectronico\");\r",
+							"if(data.l_Correo !== \"null\" & data.l_Correo !== null){\r",
+							"    var p_Correo = '\\\"' + data.l_Correo + '\\\"';\r",
+							"    postman.setGlobalVariable(\"CorreoElectronico\", p_Correo);\r",
+							"}else{\r",
+							"    postman.setGlobalVariable(\"CorreoElectronico\", data.l_Correo);\r",
+							"}\r",
+							"\r",
+							"postman.clearGlobalVariable(\"Privacidad\");\r",
+							"if(data.l_Privacidad !== \"null\" & data.l_Privacidad !== null){\r",
+							"    var p_Privacidad = '\\\"' + data.l_Privacidad + '\\\"';\r",
+							"    postman.setGlobalVariable(\"Privacidad\", p_Privacidad);\r",
+							"}else{\r",
+							"    postman.setGlobalVariable(\"Privacidad\", data.l_Privacidad);\r",
+							"}\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"if (data.Result === \"TRUE\"){\r",
+							"    tests[\"Successful POST - response 200\"] = responseCode.code === 200;\r",
+							"    var jsonData = JSON.parse(responseBody);\r",
+							"  \r",
+							"}\r",
+							"else {\r",
+							"    tests[\"Unsuccessful POST - response 200\"] = responseCode.code === 200;\r",
+							"    var jsonData = JSON.parse(responseBody);\r",
+							"    tests[\"Error message is correct\"] = responseBody.has(data.Result);\r",
+							"    tests[\"Unsuccessful POST - Errors array isn't empty\"] = jsonData.CodigoError.length !== 0;\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true,
+					"accept-encoding": true,
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Ocp-Apim-Subscription-Key",
+						"value": "9544e257e93c401a8446d24112b873f4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Contrato\": {{Contrato}},\r\n    \"TipoIdentificacion\": {{TipoDocumento}},\r\n    \"Identificacion\": {{NumeroDocumento}},\r\n    \"Nombre\": {{Nombre}},\r\n    \"Apellido\": {{Apellido}},\r\n    \"Telefono\": {{Telefono}},\r\n    \"CorreoElectronico\": {{CorreoElectronico}},\r\n    \"Privacidad\": {{Privacidad}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://epmapimdes.azure-api.net/GestionClienteOpen/ActualizaDatosCliente",
+					"protocol": "https",
+					"host": [
+						"epmapimdes",
+						"azure-api",
+						"net"
+					],
+					"path": [
+						"GestionClienteOpen",
+						"ActualizaDatosCliente"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
